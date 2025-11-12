@@ -52,10 +52,27 @@ function getProductsCategory(id) {
             return category;
     return null;
 }
-function getDynamicProducts() //đọc dữ liệu từ localStorage9
+function getDynamicProducts() //đọc dữ liệu từ localStorage
 {
-    const productsJSON = localStorage.getItem('products');
-    return productsJSON ? JSON.parse(productsJSON) : getAllProducts();
+    let productsJSON = localStorage.getItem('products');
+
+    // Kiểm tra xem localStorage có trống không
+    if (!productsJSON) {
+        // Nếu trống, lấy danh sách sản phẩm đầy đủ từ hàm getAllProducts()
+        const allProducts = getAllProducts(); 
+
+        // Chuyển nó thành chuỗi JSON
+        productsJSON = JSON.stringify(allProducts);
+
+        // Lưu chuỗi này vào localStorage với key là 'products'
+        localStorage.setItem('products', productsJSON);
+
+        // Trả về danh sách sản phẩm đầy đủ
+        return allProducts;
+    }
+
+    // Nếu localStorage đã có dữ liệu, chỉ cần đọc và trả về
+    return JSON.parse(productsJSON);
 }
 //lọc danh mục
 function filterProductsByCategory(category) {

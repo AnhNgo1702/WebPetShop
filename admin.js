@@ -35,12 +35,6 @@
         { id: 'cat_other', name: 'Khác', hidden: false }
       ]);
     }
-    if (!LS.get('products')) {
-      LS.set('products', [
-        { id: 'p1', code: 'DOG001', name: 'Chó Poodle', category: 'dog', Image: '', description: 'Chó Poodle xinh', cost: 400000, price: 600000, stock: 10, hidden: false },
-        { id: 'p2', code: 'CAT001', name: 'Mèo Anh', category: 'cat', Image: '', description: 'Mèo đẹp', cost: 200000, price: 350000, stock: 8, hidden: false }
-      ]);
-    }
     // create sample orders in both formats:
     if (!LS.get('orders') && !hasOrdersPrefix()) {
       const sampleOrders = [
