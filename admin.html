@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Pet Shop</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="admin.js">
+  </script>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginSection" class="page-center">
+    <div class="login-card">
+      <h2><i class="fa-solid fa-dog"></i> Đăng nhập Admin</h2>
+      <div class="input-group">
+        <label><i class="fa-solid fa-user"></i> Tài khoản</label>
+        <input id="adminUser" type="text" placeholder="Tên đăng nhập">
+      </div>
+      <div class="input-group">
+        <label><i class="fa-solid fa-lock"></i> Mật khẩu</label>
+        <input id="adminPass" type="password" placeholder="Mật khẩu">
+      </div>
+      <div id="loginErr" class="text-danger" style="display:none">Tên đăng nhập hoặc mật khẩu không đúng</div>
+      <button id="btnLogin" class="btn-primary">Đăng nhập</button>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminApp" class="app-root" style="display:none">
+    <header class="topbar">
+      <div class="left">
+        <button id="btnToggleSidebar" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
+        <h1 class="brand">Pet Shop</h1>
+      </div>
+      <div class="right">
+        <span id="adminDisplay"><i class="fa-solid fa-user"></i> Admin</span>
+        <button id="btnLogout" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside id="sidebar" class="sidebar">
+        <ul class="menu">
+          <li data-view="dashboard" class="active"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></li>
+          <li data-view="users"><i class="fa-solid fa-users"></i> <span>Người dùng</span></li>
+          <li data-view="categories"><i class="fa-solid fa-tags"></i> <span>Loại sản phẩm</span></li>
+          <li data-view="products"><i class="fa-solid fa-box-open"></i> <span>Sản phẩm</span></li>
+          <li data-view="orders"><i class="fa-solid fa-receipt"></i> <span>Đơn hàng</span></li>
+          <li data-view="imports"><i class="fa-solid fa-file-import"></i> <span>Nhập hàng</span></li>
+          <li data-view="inventory"><i class="fa-solid fa-warehouse"></i> <span>Tồn kho</span></li>
+          <li data-view="reports"><i class="fa-solid fa-list-check"></i> <span>Thống kê</span></li>
+        </ul>
+      </aside>
+
+      <main class="main">
+        <!-- Dashboard -->
+        <section id="dashboard" class="view active">
+          <h2>Dashboard</h2>
+          <div class="cards-row">
+            <div class="card" style="background-color:rgb(145, 211, 45);">
+              <h3 id="statUsers" style="color: white">0</h3>
+              <p style="color: white">Khách hàng</p>
+            </div>
+            <div class="card" style="background-color: purple;">
+              <h3 id="statProducts" style="color: white">0</h3>
+              <p style="color: white">Sản phẩm</p>
+            </div>
+            <div class="card"  style ="background-color: blue;">
+              <h3 id="statOrders" style="color: white">0</h3>
+              <p style="color: white">Đơn hàng</p>
+            </div>
+            <div class="card" style="background-color: red;" >
+              <h3 id="statRevenue" style="color: white">0đ</h3>
+              <p style="color: white">Doanh thu</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Users -->
+        <section id="users" class="view">
+          <h2>Quản lý người dùng</h2>
+          <div class="tool-row">
+            <input id="userSearch" placeholder="Tìm theo email hoặc tên">
+            <button id="btnAddUser" class="btn-primary">Thêm user</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Họ tên</th>
+                  <th>Điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Vai trò</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="usersTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Categories -->
+        <section id="categories" class="view">
+          <h2>Quản lý loại sản phẩm</h2>
+          <div class="tool-row">
+            <input id="catSearch" placeholder="Tìm loại">
+            <button id="btnAddCat" class="btn-primary">Thêm loại</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Tên loại</th>
+                  <th>Ẩn</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="catsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Products -->
+        <section id="products" class="view">
+          <h2>Quản lý sản phẩm</h2>
+          <div class="tool-row">
+            <select id="filterByCat">
+              <option value="">-- Tất cả loại --</option>
+              <input id="filterMinProfit" type="number" placeholder="Lợi nhuận từ %">
+              <input id="filterMaxProfit" type="number" placeholder="Đến %">
+              <input id="filterMinCost" type="number" placeholder="Giá vốn từ" style="width:120px">
+              <input id="filterMaxCost" type="number" placeholder="Đến" style="width:120px">
+              <input id="filterMinPrice" type="number" placeholder="Giá bán từ" style="width:120px">
+              <input id="filterMaxPrice" type="number" placeholder="Đến" style="width:120px">
+            </select>
+            <button id="btnResetFilter" class="btn">Reset bộ lọc</button>
+            <input id="prodSearch" placeholder="Tìm theo tên hoặc mã">
+            <button id="btnAddProd" class="btn-primary">Thêm sản phẩm</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mã</th>
+                  <th>Tên</th>
+                  <th>Loại</th>
+                  <th>Giá vốn</th>
+                  <th>Giá bán</th>
+                  <th>Lợi nhuận %</th>
+                  <th>Tồn</th>
+                  <th>Ẩn</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="prodsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Orders -->
+        <section id="orders" class="view">
+          <h2>Quản lý đơn hàng</h2>
+          <div class="tool-row">
+            <input id="orderSearch" placeholder="Tìm mã hoặc khách">
+            <select id="orderStatusFilter">
+              <option value="">Tất cả</option>
+              <option>Đang xử lý</option>
+              <option>Đã xử lý</option>
+              <option>Đã giao</option>
+              <option>Hủy</option>
+            </select>
+            <select id="orderCategoryFilter">
+              <option value="">Tất cả loại</option>
+            </select>
+            <input id="orderFrom" type="date">
+            <input id="orderTo" type="date">
+            <button id="btnFilterOrders" class="btn-primary">Lọc</button>
+            <button id="btnExportOrders" class="btn">Xuất CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Mã</th>
+                  <th>Khách</th>
+                  <th>Ngày</th>
+                  <th>Tổng</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Imports -->
+        <section id="imports" class="view">
+          <h2>Quản lý nhập hàng</h2>
+          <div class="tool-row">
+            <button id="btnNewImport" class="btn-primary">Tạo phiếu nhập mới</button>
+          </div>
+          <div class="tool-row">
+            <input id="impFrom" type="date">
+            <input id="impTo" type="date">
+            <select id="impStatus">
+              <option value="">-- Trạng thái --</option>
+              <option value="draft">Nháp</option>
+              <option value="completed">Hoàn thành</option>
+            </select>
+            <input id="impMinItems" type="number" placeholder="Tối thiểu mặt hàng" style="width:140px">
+            <input id="impMaxItems" type="number" placeholder="Tối đa mặt hàng" style="width:140px">
+            <input id="impMinTotal" type="number" placeholder="Tổng tiền từ" style="width:140px">
+            <input id="impMaxTotal" type="number" placeholder="Tổng tiền đến" style="width:140px">
+            <button id="btnFilterImports" class="btn-primary">Lọc</button>
+            <input id="impSearchId" placeholder="Tìm theo ID" style="width:160px">
+            <button id="btnResetImports" class="btn">Reset bộ lọc</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Ngày</th>
+                  <th>Trạng thái</th>
+                  <th>#Mặt hàng</th>
+                  <th>Tổng tiền</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="importsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Inventory -->
+        <section id="inventory" class="view">
+          <h2>Tồn kho</h2>
+          <div class="tool-row">
+            <input id="invSearch" placeholder="Tìm theo mã hoặc tên" style="width:180px">
+            <select id="invFilterCat" style="width:160px">
+              <option value="">-- Tất cả loại --</option>
+            </select>
+            <input id="invMinStock" type="number" placeholder="Tồn kho từ" style="width:120px">
+            <input id="invMaxStock" type="number" placeholder="Tồn kho đến" style="width:120px">
+            <label><input id="invOnlyLow" type="checkbox"> Chỉ cảnh báo tồn kho thấp</label>
+            <br>
+            <button id="btnResetInventory" class="btn">Reset bộ lọc</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mã</th>
+                  <th>Tên</th>
+                  <th>Loại</th>
+                  <th>Tồn</th>
+                  <th>Cảnh báo</th>
+                </tr>
+              </thead>
+              <tbody id="invTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Reports -->
+        <section id="reports" class="view">
+          <h2>Thống kê</h2>
+          <div class="tool-row">
+            <select id="reportCatFilter">
+              <option value="">Tất cả loại</option>
+            </select>
+            <input id="reportFrom" type="date">
+            <input id="reportTo" type="date">
+            <button id="btnGenReport" class="btn-primary">Tạo báo cáo</button>
+          </div>
+          <div id="reportResult" class="report-result">
+            <p><strong>Tổng doanh thu:</strong> <span id="rep_total">0đ</span></p>
+            <p><strong>Tổng đơn hàng:</strong> <span id="rep_count">0</span></p>
+            <h4>Sản phẩm bán chạy</h4>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng bán</th>
+                    <th>Tổng tiền</th>
+                  </tr>
+                </thead>
+                <tbody id="rep_table"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

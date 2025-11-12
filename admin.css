@@ -1,0 +1,297 @@
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  background: #f4f4f4;
+}
+
+/* LOGIN SECTION */
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login-card {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #333;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-group label i {
+  margin-right: 8px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.text-danger {
+  color: red;
+  font-size: 13px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #ff4d4d;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* APP HEADER */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff7f00;
+  color: #fff;
+  padding: 12px 20px;
+}
+
+.topbar .brand {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.topbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-logout {
+  background: #fff;
+  color: #ff7f00;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #c0392b;
+  color: #fff;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+
+.sidebar ul.menu {
+  list-style: none;
+}
+
+.sidebar ul.menu li {
+  padding: 14px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul.menu li:hover {
+  background: #ff7f00;
+}
+
+.sidebar ul.menu li.active {
+  background: #0056b3;
+}
+
+.sidebar ul.menu li i {
+  min-width: 20px;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f4f4f4;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.cards-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.card {
+  flex: 1 1 180px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+
+/* TOOL ROWS */
+.tool-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tool-row input,
+.tool-row select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+
+.tool-row button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tool-row button:hover {
+  background: #ff4d4d;
+}
+
+/* TABLES */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th {
+  background: #f7f7f7;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .sidebar ul.menu {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sidebar ul.menu li {
+    flex: 1;
+    justify-content: center;
+  }
+}

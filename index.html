@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="full.css">
+        <title>CHTC</title>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="logo"><i class="fa-solid fa-paw"></i>   Pet Shop</h1>
+                    <nav class="main-nav">
+                        <a href="#" data-view="home">Trang chủ</a>
+                        <a href="#" data-view="about">Giới thiệu</a>
+                        <a href="#" data-view="products" data-category="all">Danh mục sản phẩm</a>
+                        <a href="#" data-view="contact">Liên hệ</a>
+                    </nav>
+                    <div class="user-actions">
+                        <div class="cart">
+                            <a><i class="fa-solid fa-cart-shopping"></i><span id="cartCount">0</span></a>
+                        </div>
+                        <div id="userSection">
+                            <a href="#" data-view="login" id="loginBtn"><i class="fa-regular fa-user"></i> Đăng nhập</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="container">
+            <!--home-->
+            <div id="homeView" class="view active">
+                <div class="hero">
+                    <h2>Chào mừng bạn đến với cửa hàng thú cưng <i class="fa-solid fa-face-laugh-wink"></i></h2>
+                    <p><i class="fa-solid fa-heart" style="color: red"></i> Nơi cung cấp các bé thú cưng siuu siuu đáng yêu <i class="fa-solid fa-heart" style="color: red"></i></p>
+                </div>
+                <div class="categories">
+                    <div class="category-card" data-view="products" data-category="dog"><h3><i class="fa-solid fa-dog"></i>   Chó</h3></div>
+                    <div class="category-card" data-view="products" data-category="cat"><h3><i class="fa-solid fa-cat"></i>   Mèo</h3></div>
+                    <div class="category-card" data-view="products" data-category="food"><h3><i class="fa-solid fa-bowl-food"></i>   Thức ăn</h3></div>
+                    <div class="category-card" data-view="products" data-category="other"><h3><i class="fa-solid fa-database"></i>   Sản phẩm khác</h3></div>
+                </div>
+            </div>
+            <!--about-->
+            <div id="aboutView" class="view">
+                <h2>Về Pet Shop</h2>
+                <p>Pet Shop được thành lập với sứ mệnh mang đến những sản phẩm chất lượng tốt nhất, an toàn nhất cho những người bạn đáng yêu của chúng ta.</p>
+                <div>
+                    <h3>Giá Trị Của Chúng Tôi</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Sản phẩm chính hãng: Chỉ cung cấp thức ăn, đồ chơi, và phụ kiện có nguồn gốc rõ ràng.</li>
+                        <li><i class="fa-solid fa-truck"></i> Giao hàng nhanh: Hỗ trợ giao hàng trong 24 giờ tại khu vực TP.HCM.</li>
+                        <li><i class="fa-solid fa-people-group"></i> Đội ngũ chuyên nghiệp: Sẵn sàng tư vấn và giải đáp mọi thắc mắc về chăm sóc thú cưng.</li>
+                    </ul>
+                    <h3>Lịch Sử Hình Thành</h3>
+                    <p>Bắt đầu từ một cửa hàng nhỏ vào năm 2006, Pet Shop đã phát triển thành một hệ thống bán lẻ trực tuyến lớn, phục vụ hàng nghìn khách hàng yêu thú cưng trên cả nước.</p>
+                </div>
+            </div>
+            <!--product-->
+            <div id="productsView" class="view">
+                <div class="products-container">
+                    <div class="products-sidebar">
+                        <h3>Danh mục sản phẩm</h3>
+                        <div>
+                            <button data-category="dog">Chó</button>
+                            <button data-category="cat">Mèo</button>
+                            <button data-category="food">Thức ăn</button>
+                            <button data-category="other">Sản phẩm khác</button>
+                        </div>
+                    </div>
+                    <div class="products-main">
+                        <div class="products-search">
+                            <div class="search-row">
+                            <input type="text" id="productsSearchInput" placeholder="Tìm kiếm sản phẩm...">
+                            <button id="productsSearchBtn"><i class="fa-solid fa-magnifying-glass" style="color: blue"></i></button>
+                            </div>
+                        </div>
+                        <div class="advanced-search">
+                            <h3>LỌC</h3>
+                            <div class="filters">
+                                <select>
+                                    <option value="">Tất cả loại</option>
+                                    <option value="dog">Chó</option>
+                                    <option value="cat">Mèo</option>
+                                    <option value="food">Thức ăn</option>
+                                    <option value="other">sản phẩm khác</option>
+                                </select>
+                                <input type="number" id="avdSearchMinPrice" placeholder="Giá từ">
+                                <input type="number" id="avdSearchMaxPrice" placeholder="Giá đến">
+                                <button id="advSearchBtn">Tìm kiếm</button>
+                                <button id="clearSearchBtn">Xóa bộ lọc</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="productsList"></div>
+                            <div id="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contact-->
+            <div id="contactView" class="view">
+                <h2><i class="fa-solid fa-phone-volume" style="color: red"></i>LIÊN HỆ VỚI CHÚNG TÔI</h2>
+                <p>Chúng tôi luôn sẵn lòng lắng nghe và hỗ trợ bạn. Vui lòng chọn cách thức liên hệ thuận tiện nhất:</p>
+                <div>
+                    <h3>Địa chỉ cửa hàng:</h3>
+                    <p><i class="fa-solid fa-map-pin" style="color: red"></i> 123 Lê Lai, phường 5, quận 1, Tp.HCM</p>
+                </div>
+                <div>
+                    <h3>HotLine:</h3>
+                    <p><i class="fa-solid fa-phone" style="color: red"></i> 19001868 (8h-22)</p>
+                </div>
+                <div>
+                    <h3>Email:</h3>
+                    <p><i class="fa-solid fa-envelope" style="color:antiquewhite"></i>  petshop2006@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Facebook:</h3>
+                    <p><i class="fa-brands fa-square-facebook" style="color:blue"></i>  Pet Shop</p>
+                </div>
+            </div>
+            <!--login-->
+            <div id="loginView" class="view">
+                <div class="login-container">
+                    <div id="loginForm">
+                        <h3>Đăng nhập</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="loginEmail">Email:</label>
+                                <input type="email" id="loginEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Mật khẩu:</label>
+                                <input type="password" id="loginPassword" required>
+                            </div>
+                            <button type="submit">Đăng nhập</button>
+                        </form>
+                        <p>Bạn chưa có tài khoản? <a href="#" id="showRegister">Đăng ký</a></p>
+                    </div>
+                    <div id="registerForm" style="display: none">
+                        <h3>Đăng ký</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="regUsername">Tên tài khoản: </label>
+                                <input type="text" id="regUsername" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regEmail">Email:</label>
+                                <input type="email" id="regEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPassword">Mật khẩu:</label>
+                                <input type="password" id="regPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPhone">Số điện thoại:</label>
+                                <input type="number" id="regPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <lable for="regAddress">Địa chỉ mặc định:</lable>
+                                <input type="text" id="regAddress" required>
+                            </div>
+                            <button type="submit">Đăng ký</button>
+                        </form>
+                        <p>Bạn đã có tài khoản? <a href="#" id="showLogin"> Đăng nhập</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!--footer-->
+        <footer>
+            <div>
+                <div>
+                    <div class="footer-branding">
+                        <h3>@ PET SHOP</h3>
+                        <p>“Chăm sóc tận tâm - vì mỗi bé xứng đáng được yêu thương.”</p>
+                        <p>“Thú cưng vui - bạn cũng vui!”</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="data.js"></script>
+        <script src="content.js"></script>
+        
+    </body>
+</html>

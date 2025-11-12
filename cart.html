@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="cart.css">
+    <title>Giỏ hàng - Pet Shop</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo"><i class="fa-solid fa-paw"></i> Pet Shop</h1>
+                <nav class="main-nav">
+                    <a href="index.html">Trang chủ</a>
+                    <a href="index.html#about">Giới thiệu</a>
+                    <a href="index.html#products">Danh mục sản phẩm</a>
+                    <a href="index.html#contact">Liên hệ</a>
+                </nav>
+                <div class="user-actions">
+                    <div id="userSection">
+                        <span id="userNameDisplay"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-page">
+            <h1><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng của bạn</h1>
+            
+            <div id="emptyCart" class="empty-cart" style="display: none;">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <h2>Giỏ hàng trống</h2>
+                <p>Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm!</p>
+                <a href="index.html" class="btn-continue">Tiếp tục mua sắm</a>
+            </div>
+
+            <div id="cartContent" class="cart-content">
+                <div class="cart-items">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartItemsList">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-summary">
+                    <h2>Thông tin đơn hàng</h2>
+                    
+                    <div class="summary-item">
+                        <span>Tạm tính:</span>
+                        <span id="subtotal">0đ</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Phí vận chuyển:</span>
+                        <span id="shipping">30.000đ</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Tổng cộng:</span>
+                        <span id="total">0đ</span>
+                    </div>
+
+                    <div class="delivery-info">
+                        <h3>Thông tin giao hàng</h3>
+                        <div class="address-options">
+                            <label class="radio-label">
+                                <input type="radio" name="addressType" value="default" checked>
+                                Sử dụng địa chỉ mặc định
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="addressType" value="new">
+                                Nhập địa chỉ mới
+                            </label>
+                        </div>
+                        
+                        <div id="defaultAddress" class="address-display">
+                            <p id="userAddressDisplay"></p>
+                        </div>
+
+                        <div id="newAddressForm" class="address-form" style="display: none;">
+                            <div class="form-group">
+                                <label>Họ và tên:</label>
+                                <input type="text" id="newName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại:</label>
+                                <input type="tel" id="newPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ chi tiết:</label>
+                                <input type="text" id="newStreet" placeholder="Số nhà, tên đường" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phường/Xã:</label>
+                                <input type="text" id="newWard" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Quận/Huyện:</label>
+                                <input type="text" id="newDistrict" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tỉnh/Thành phố:</label>
+                                <input type="text" id="newCity" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-info">
+                        <h3>Phương thức thanh toán</h3>
+                        <div class="payment-options">
+                            <label class="radio-label">
+                                <input type="radio" name="paymentMethod" value="cash" checked>
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                                Tiền mặt khi nhận hàng
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="paymentMethod" value="transfer">
+                                <i class="fa-solid fa-building-columns"></i>
+                                Chuyển khoản ngân hàng
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="paymentMethod" value="online">
+                                <i class="fa-solid fa-credit-card"></i>
+                                Thanh toán trực tuyến
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn-checkout" onclick="proceedToCheckout()">
+                        <i class="fa-solid fa-check-circle"></i> Đặt hàng
+                    </button>
+                    <a href="index.html" class="btn-continue-shopping">
+                        <i class="fa-solid fa-arrow-left"></i> Tiếp tục mua sắm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-branding">
+                <h3>@ PET SHOP</h3>
+                <p>"Chăm sóc tận tâm - vì mỗi bé xứng đáng được yêu thương."</p>
+                <p>"Thú cưng vui - bạn cũng vui!"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
